@@ -5,7 +5,7 @@ import subprocess
 
 
 def run_nmap_scan(target_ip):
-    nmap_command = ["nmap", "-sV", "-sV", target_ip]
+    nmap_command = ["nmap", "-sC", "-sV", target_ip, '--open']
     nmap_result = subprocess.run(nmap_command, capture_output=True, text=True)
     return parse_nmap_output(nmap_result)
 
@@ -23,20 +23,10 @@ def parse_nmap_output(self):
             port, state, service, version = match.groups()
             port_info[port] = [service, version.strip()]
 
+
+
     return port_info
 
-def enumerate_http_webserver():
-    #   TODO: Print webserver header info
-    #   TODO: Print service version - if any version is available
-    #   TODO: Directory Scan/FUZZ
-    #   TODO: Any templates or powered by listed in the header or footer
-    #   TODO: Search the service on github or a google dork and open a link and get the title of the exploit. MAybe search on explloit db?
-    #   TODO: Try LFI for a windows or linux machine
-
-
-
-
-    return ""
 def enumerate_ftp():
     # TODO: Try anonymous login
     # TODO: Try admin login
@@ -63,4 +53,4 @@ def enumerate_nfs():
 
 
 target_ip_address = sys.argv[0]
-print(run_nmap_scan('76.36.18.6'))
+print(run_nmap_scan(''))

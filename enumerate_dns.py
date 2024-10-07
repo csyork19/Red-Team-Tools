@@ -1,6 +1,6 @@
 import subprocess
 
-def enumerate_dns(target, port):
+def enumerate_dns(target, domain_name,port):
     print('*************************************************************')
     print('******************** DNS A RECORD - IPv4 ********************')
     a_record_command = 'host ' + str(target)
@@ -36,6 +36,12 @@ def enumerate_dns(target, port):
     dns_record_command = 'host -t txt' + str(target)
     dns_record_info = subprocess.run(dns_record_command)
     print(dns_record_info)
+
+    print('******************************************************************************************')
+    print('******************** DNS zone transfer ********************')
+    dns_zone_transfer_command = 'dig axfr ' + str(domain_name) + '@' + str(target)
+    dns_zone_transfer_info = subprocess.run(dns_zone_transfer_command)
+    print(dns_zone_transfer_info)
 
     print('******************************************************')
     print('******************** dnsenum tool ********************')
